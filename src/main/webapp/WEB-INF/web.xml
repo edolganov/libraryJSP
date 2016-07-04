@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+           version="3.0">
+
+    <servlet>
+        <servlet-name>LibraryServlet</servlet-name>
+        <servlet-class>com.examples.libraryJSP.controller.LibraryServlet</servlet-class>
+        <init-param>
+            <param-name>viewBase</param-name>
+            <param-value>/libraryJSP/view/</param-value>
+        </init-param>
+        <init-param>
+            <param-name>designBase</param-name>
+            <param-value>/libraryJSP/</param-value>
+        </init-param>
+        <init-param>
+            <param-name>imageURL</param-name>
+            <param-value>/libraryJSP/images/</param-value> <!-- /libraryJSP/images/ -->
+        </init-param>
+        <init-param>
+            <param-name>jdbcDriver</param-name>
+            <param-value>com.mysql.cj.jdbc.Driver</param-value>  <!-- com.mysql.cj.jdbc.Driver\ com.mysql.jdbc.Driver -->
+        </init-param>
+        <init-param>
+            <param-name>dbURL</param-name>
+            <param-value>jdbc:mysql://localhost:3306/library</param-value>
+        </init-param>
+        <init-param>
+            <param-name>dbUserName</param-name>
+            <param-value>root</param-value>
+        </init-param>
+        <init-param>
+            <param-name>dbPassword</param-name>
+            <param-value>root</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LibraryServlet</servlet-name>
+        <url-pattern>/library/</url-pattern>  <!--   -->
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LibraryServlet</servlet-name>
+        <url-pattern>/libraryJSP/</url-pattern>  <!--   -->
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LibraryServlet</servlet-name>
+        <url-pattern>/libraryJSP/view/</url-pattern>  <!--   -->
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ImagesServlet</servlet-name>
+        <servlet-class>com.examples.libraryJSP.controller.ImagesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ImagesServlet</servlet-name>
+        <url-pattern>/libraryJSP/view/image/*</url-pattern>  <!--   -->
+    </servlet-mapping>
+    <!--<servlet-mapping>
+        <servlet-name>ImagesServlet</servlet-name>
+        <url-pattern>/libraryJSP/view/image/avatar/*</url-pattern>
+    </servlet-mapping>-->
+    <!--<servlet-mapping>
+        <servlet-name>ImagesServlet</servlet-name>
+        <url-pattern>/libraryJSP/view/image/cover/*</url-pattern>
+    </servlet-mapping>-->
+
+</web-app>
