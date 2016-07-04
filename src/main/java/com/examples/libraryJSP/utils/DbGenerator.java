@@ -54,25 +54,28 @@ public class DbGenerator {
 
         Connection connection = dataManager.getConnection();
         if (connection != null) {
-            for (int i = 0; i < SQL_SCRIPTS.length; i++) {
-                try (InputStream is = DbGenerator.class.getResourceAsStream(SQL_SCRIPTS[i])) {
-                    importSQL(connection, is);
-                } catch (SQLException e) {
-                    e.printStackTrace();
+
+            try (InputStream is0 = DbGenerator.class.getResourceAsStream(SQL_SCRIPTS[0])) {
+                importSQL(connection, is0);
+                try (InputStream is1 = DbGenerator.class.getResourceAsStream(SQL_SCRIPTS[1])) {
+                    importSQL(connection, is1);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            for (String avatar[] : AVATARS) {
+                try (InputStream avatarSource = DbGenerator.class.getResourceAsStream(avatar[1])) {
+                    dataManager.setAvatarByUserId(Integer.parseInt(avatar[0] == null ? "" : avatar[0]), avatarSource);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-            for (String avatar[]:AVATARS) {
-                try (InputStream avatarSource = DbGenerator.class.getResourceAsStream(avatar[1])){
-                    dataManager.setAvatarByUserId(Integer.parseInt(avatar[0]==null?"":avatar[0]), avatarSource);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            for (String cover[]:COVERS) {
-                try (InputStream coverSource = DbGenerator.class.getResourceAsStream(cover[1])){
-                    dataManager.setCoverByBookId(cover[0],coverSource);
+            for (String cover[] : COVERS) {
+                try (InputStream coverSource = DbGenerator.class.getResourceAsStream(cover[1])) {
+                    dataManager.setCoverByBookId(cover[0], coverSource);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
